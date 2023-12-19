@@ -17,11 +17,11 @@ app.get("/", (req, res) => {
 // auth route
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
+// survey route
+const surveyRoutes = require("./routes/survey.routes");
+const { authMiddleware } = require("./middlewares/auth.middlewares");
+app.use("/survey", authMiddleware, surveyRoutes);
 
-// to do routes
-// const todoRoutes = require("./routes/todo.routes");
-// const { authMiddleware } = require("./middlewares/auth.middleware");
-// app.use("/todo", authMiddleware, todoRoutes);
 
 app.listen(8000, () => {
     console.log("Server listening on PORT:", 8000);

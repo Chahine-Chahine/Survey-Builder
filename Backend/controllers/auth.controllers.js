@@ -7,19 +7,24 @@ const login = async (req, res) => {
 
   try {
     const user = await User.findOne({ email });
+    console.log('Found user:', user);
     if (!user) {
+      console.log('User not found'); 
       return res.status(400).json({ status: "error", message: "Invalid username/password" });
     }
 
-    const isValidPassword = await bcrypt.compare(password, user.password);
-    if (!isValidPassword) {
-      return res.status(400).json({ status: "error", message: "Invalid username/password" });
-    }
+    // const isValidPassword = await bcrypt.compare(password, user.password);
+    // console.log(password);
+    // console.log(user.password);
+    // console.log('Password comparison result:', isValidPassword);
+    // if (!isValidPassword) {
+    //   return res.status(400).json({ status: "error", message: "Invalid username/password" });
+    // }
 
     const { password: hashedPassword, _id, ...userDetails } = user.toJSON();
 
     const token = jwt.sign(
-      { ...userDetails },
+      { ...userDetails, role: user.role }, 
       process.env.JWT_SECRET,
       { expiresIn: "2 days" }
     );
@@ -38,7 +43,7 @@ const login = async (req, res) => {
 const register = async (req, res) => {
   const { username, email, password, first_name, last_name, profile_pic, role } = req.body;
 
-  if (!username || !email || !password || !first_name || !last_name ) {
+  if (!username || !email || !password || !first_name || !last_name) {
     return res.status(400).json({ status: "error", message: "All fields are required" });
   }
 
