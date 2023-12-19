@@ -1,6 +1,6 @@
 const express = require("express");
-const cors = require("cors"); 
-const { connectToMongoDB } = require("./configs/connection");
+const cors = require("cors"); // Import the cors middleware
+const { connectToMongoDB } = require("./configs/mongoDB.configs");
 const app = express();
 
 app.use(express.json());
@@ -9,6 +9,10 @@ app.use(express.json());
 app.use(cors());
 
 require("dotenv").config();
+
+app.get("/", (req, res) => {
+    console.log("Hello!");
+});
 
 // auth route
 const authRoutes = require("./routes/auth.routes");

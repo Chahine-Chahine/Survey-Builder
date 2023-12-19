@@ -1,12 +1,12 @@
 {
-  "name": "survey-backend",
+  "name": "survey-builder",
   "version": "1.0.0",
-  "description": "",
+  "description": "Survey Builder using nodeJS & mongoDB",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "chahine chahine",
+  "author": "Chahine Chahine",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
