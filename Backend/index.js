@@ -1,11 +1,9 @@
 const express = require("express");
-const cors = require("cors"); // Import the cors middleware
+const cors = require("cors"); 
 const { connectToMongoDB } = require("./configs/mongoDB.configs");
 const app = express();
 
 app.use(express.json());
-
-// Enable CORS for all routes
 app.use(cors());
 
 require("dotenv").config();
