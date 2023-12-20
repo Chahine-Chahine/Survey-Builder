@@ -1,7 +1,7 @@
 const User = require("../models/User.model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const aragona = require("argon2");
+// const aragona = require("argon2");
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -14,13 +14,13 @@ const login = async (req, res) => {
       return res.status(400).json({ status: "error", message: "Invalid username/password" });
     }
 
-    const isValidPassword = await aragona.verify(user.password, password);
+    const isValidPassword = await bcrypt.compare(password, user.password);
     console.log(password);
     console.log(user.password);
     console.log('Password comparison result:', isValidPassword);
-    // if (!isValidPassword) {
-    //   return res.status(400).json({ status: "error", message: "Invalid username/password" });
-    // }
+    if (!isValidPassword) {
+      return res.status(400).json({ status: "error", message: "Invalid password" });
+    }
 
     const { password: hashedPassword, _id, ...userDetails } = user.toJSON();
 
@@ -50,11 +50,10 @@ const register = async (req, res) => {
 
   try {
     const userRole = role || "user";
-    const hashedPassword = await aragona.hash(password, 10);
     const user = new User({
       username,
       email,
-      password: hashedPassword,
+      password,
       first_name,
       last_name,
       profile_pic,
