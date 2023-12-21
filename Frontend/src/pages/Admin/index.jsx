@@ -1,5 +1,6 @@
 import  { useState } from "react";
 import "./index.css"
+import request from "../../helpers/request_helper";
 const AdminPage = () => {
   const [surveyData, setSurveyData] = useState({
     title: "",
@@ -12,6 +13,7 @@ const AdminPage = () => {
     ],
   });
 
+  //handle change
   const handleChange = (event, questionIndex, answerIndex) => {
     const { name, value, type, checked } = event.target;
 
@@ -44,6 +46,7 @@ const AdminPage = () => {
     });
   };
 
+  //add a question function
   const addQuestion = () => {
     setSurveyData((prevData) => ({
       ...prevData,
@@ -58,6 +61,7 @@ const AdminPage = () => {
     }));
   };
 
+  //add an answer function
   const addAnswer = (questionIndex) => {
     setSurveyData((prevData) => {
       const updatedQuestions = [...prevData.questions];
@@ -66,6 +70,7 @@ const AdminPage = () => {
     });
   };
 
+  //remove question function
   const removeQuestion = (questionIndex) => {
     setSurveyData((prevData) => {
       const updatedQuestions = [...prevData.questions];
@@ -74,6 +79,7 @@ const AdminPage = () => {
     });
   };
 
+  //remove answer function
   const removeAnswer = (questionIndex, answerIndex) => {
     setSurveyData((prevData) => {
       const updatedQuestions = [...prevData.questions];
@@ -82,8 +88,22 @@ const AdminPage = () => {
     });
   };
 
-  const handleSubmit = () => {
-    console.log("Survey Data:", surveyData);
+  //handle submit
+  const handleSubmit = async () => {
+    try {
+      const response = await request({
+        route: "/",
+        method: "POST",
+        body: surveyData
+      });
+      if (response.status === 201) {
+        console.log('Survey submitted successfully');
+      } else {
+        console.error('Failed to submit survey');
+      }
+    } catch (error) {
+      console.error('An error occurred while submitting survey:', error);
+    }
   };
 
   return (
