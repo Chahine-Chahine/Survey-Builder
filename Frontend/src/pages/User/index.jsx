@@ -1,17 +1,33 @@
 import SurveyCard from "../../components/User/surveyCard";
+// import axios from "axios";
+// import React from "react";
 
 
-
-
+// const baseUrl = "http://localhost:8000/survey/";
 
 function UserPage(){
-    const authorization = localStorage.getItem("token");
-    const authorizationToken = "Bearer " + authorization;
-    console.log(authorizationToken)
+    //token authorization
+    // const authorization = localStorage.getItem("token");
+    // const authorizationToken = "Bearer " + authorization;
+    // console.log(authorizationToken);
+    // //usestate & axios fetch 
+    // const [survey, setSurvey] = React.useState(null);
+    // React.useEffect(()=>{
+    //     axios.get(baseUrl)
+    //     .then((response) => {
+    //         setSurvey(response.data);
+    //     });
+    // }, []);
+
+    // if(!survey){
+    //     return console.error("error during fetch");
+    // }
+
+
 
     return (
         <>
-        <SurveyCard id={1} Title={"Favorite instructor"} Question={"Who is Your Favorite instructor?"}/>
+        {/* <SurveyCard id={survey.id} Title={survey.Title} Question={survey.Question}/> */}
         <SurveyCard id={2} Title={"Preferable Language"} Question={"If you can use one programming language for the rest of your life what would it be?"}/>
         <SurveyCard id={3} Title={"Sports"} Question={"List Your Hobbies from most preferable to the least"}/>
         <SurveyCard id={4} Title={"Favorite instructor"} Question={"Who is Your Favorite instructor?"}/>
@@ -23,51 +39,3 @@ function UserPage(){
 
 export default UserPage;
 
-
-// Fetch with bugs
-
-
-// import { useState, useEffect } from "react";
-// import SurveyCard from "../../components/User/surveyCard";
-// import request from "../../helpers/request_helper"; 
-
-// function UserPage() {
-//   const [surveys, setSurveys] = useState([]);
-
-//   useEffect(() => {
-//     const fetchSurveys = async () => {
-//       try {
-//         const response = await request({
-//           route: "/", 
-//           method: "GET",
-//         });
-
-//         if (response.status === 200) {
-//           setSurveys(response.data.surveys);
-//           console.log('Surveys fetched successfully');
-//         } else {
-//           console.error('Failed to fetch surveys');
-//         }
-//       } catch (error) {
-//         console.error('An error occurred while fetching surveys:', error);
-//       }
-//     };
-
-//     fetchSurveys();
-//   }, []); 
-
-//   return (
-//     <>
-//       {surveys.map((survey) => (
-//         <SurveyCard
-//           key={survey._id}
-//           id={survey._id}
-//           Title={survey.title}
-//           Question={survey.questions.length > 0 ? survey.questions[0].text : ""}
-//         />
-//       ))}
-//     </>
-//   );
-// }
-
-// export default UserPage;
