@@ -81,7 +81,7 @@ exports.deleteSurvey = async (req, res) => {
     if (!deletedSurvey) {
       return res.status(404).json({ error: 'Survey not found' });
     }
-    res.status(204).json(); // No content for successful deletion
+    res.status(204).json(); 
   } catch (error) {
     console.error('Error deleting survey:', error);
     res.status(500).json({ error: 'Internal Server Error' });

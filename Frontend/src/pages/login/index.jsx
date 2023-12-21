@@ -31,8 +31,14 @@
             console.log(response)
             if (response.status === 200) {
                 localStorage.setItem("token", response.data.token);
-                console.log("success"),
-                navigate("/homepage")
+                const userRole = response.data.user.role;
+
+                // Navigate based on the user's role
+                if (userRole === "admin") {
+                    navigate("/admin");
+                } else {
+                    navigate("/user");
+                }
              
             } 
             else if (response.status === 401) {
