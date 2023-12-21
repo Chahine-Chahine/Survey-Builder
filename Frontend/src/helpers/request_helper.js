@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:8000/survey";
+axios.defaults.baseURL = "http://localhost:8000/auth/";
 
 export const request = async ({ route, method = "GET", body }) => {
     try{
@@ -11,6 +11,7 @@ export const request = async ({ route, method = "GET", body }) => {
           data: body,
           headers: {
               "Content-Type": "application/json",
+
           },
       });
       return response;  

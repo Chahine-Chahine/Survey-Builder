@@ -30,7 +30,9 @@
             });
             console.log(response)
             if (response.status === 200) {
-                localStorage.setItem("token", response.data.token);
+                const token = response.data.token;
+                console.log(token)
+                localStorage.setItem("token",token);
                 const userRole = response.data.user.role;
 
                 // Navigate based on the user's role

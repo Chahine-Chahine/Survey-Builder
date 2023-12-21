@@ -2,6 +2,10 @@ import  { useState } from "react";
 import "./index.css"
 import request from "../../helpers/request_helper";
 const AdminPage = () => {
+  const authorization = localStorage.getItem("token");
+  const authorizationToken = "Bearer " + authorization;
+  console.log(authorizationToken)
+
   const [surveyData, setSurveyData] = useState({
     title: "",
     questions: [
@@ -94,7 +98,10 @@ const AdminPage = () => {
       const response = await request({
         route: "/",
         method: "POST",
-        body: surveyData
+        body: surveyData,
+        headers: {
+          authorization : authorizationToken
+      },
       });
       if (response.status === 201) {
         console.log('Survey submitted successfully');
