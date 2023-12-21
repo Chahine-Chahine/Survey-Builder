@@ -1,42 +1,38 @@
-const mongoose = require ("mongoose");
+const mongoose = require('mongoose');
 
+const answerSchema = new mongoose.Schema({
+  text: String,
+});
+
+const questionSchema = new mongoose.Schema({
+  text: String,
+  type: String,
+  answers: [answerSchema],
+});
 
 const surveySchema = new mongoose.Schema({
-    title: {
-      type: String,
-      required: true,
-    },
-    adminId: {
+  title: {
+    type: String,
+    required: true,
+  },
+  adminId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
+  questions: [questionSchema],
+  participants: [
+    {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
+      ref: 'User',
     },
-    questions: [
-      {
-        text: String,
-        type: String,
-        answers: [
-          {
-            text: String,
-          },
-        ],
-      },
-    ],
-    participants: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-      },
-    ],
-  }, { timestamps: true });
+  ],
+}, { timestamps: true });
 
-  surveySchema.pre(
-    "save",
-    async function (next) {
-        console.log("saved successfully")
-    }
-     
-  );
+surveySchema.pre('save', async function (next) {
+  console.log('saved successfully');
+  next();
+});
 
-const survey = mongoose.model("Survey", surveySchema);
+const Survey = mongoose.model('Survey', surveySchema);
 
-module.exports = survey;
+module.exports = Survey;

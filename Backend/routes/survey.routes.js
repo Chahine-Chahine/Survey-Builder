@@ -8,10 +8,10 @@ const {
   deleteSurvey,
 } = require('../controllers/survey.controllers');
 
-router.post('/survey', addSurvey);
-router.get('/survey', getAllSurveys);
-router.get('/survey/:id', getSurveyById);
-router.put('/survey/:id', updateSurvey);
-router.delete('/survey/:id', deleteSurvey);
+router.post('/', addSurvey);
+router.get('/', getAllSurveys);
+router.get('/:id', getSurveyById);
+router.put('/:id', updateSurvey);
+router.delete('/:id', deleteSurvey);
 
 module.exports = router;

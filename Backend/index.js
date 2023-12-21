@@ -8,10 +8,6 @@ app.use(cors());
 
 require("dotenv").config();
 
-app.get("/", (req, res) => {
-    console.log("Hello!");
-});
-
 // auth route
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
