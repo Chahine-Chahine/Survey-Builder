@@ -33,7 +33,7 @@ function Register() {
       if (response.status === 200) {
         localStorage.setItem("token", response.data.token);
         console.log("success");
-        navigate("/homepage");
+        navigate("/");
       } else if (response.status === 400) {
         setShowError("All fields are required");
       } else {

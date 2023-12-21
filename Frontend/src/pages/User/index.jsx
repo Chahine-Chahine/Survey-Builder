@@ -5,6 +5,9 @@ import SurveyCard from "../../components/User/surveyCard";
 
 
 function UserPage(){
+    const authorization = localStorage.getItem("token");
+    const authorizationToken = "Bearer " + authorization;
+    console.log(authorizationToken)
 
     return (
         <>
